@@ -169,6 +169,48 @@ app.get('/ma',(req, res) => {
   }
 });
 
+app.post('/mp',urlencodedParser,(req, res) => {
+   console.log("post products!")
+   ops = 'Manage Products' ;
+   if(req.headers.referer){ //check if req come from login auth
+      console.log(req.headers.referer) 
+     if(req.headers.referer.match('mp')) {
+        console.log("Updating products details"); 
+        owner = req.body.owner
+        prodName = req.body.addprod;
+        category = req.body.addcatep;
+        brand = req.body.addbrandp;
+        brandOps = req.body.AddorRemove
+
+        if (brandOps == "Remove") {
+           var dk = req.body.prodname;
+           const brandArr = dk.split(":");
+           const rmProduct = "DELETE FROM varitas.products WHERE name = '" + brandArr[0] + "'";
+           connection.query(rmProduct, (err,result) => {
+            if (err) throw err;
+            console.log(result);
+           });
+
+        }    
+        else if (prodName != null && category != null && brand != null && brandOps == "Add") {
+         console.log("New prod added!")
+         
+         const addProduct = "INSERT INTO varitas.products(name,category,owner_name,brand_name) VALUES('" + prodName
+         + "','" + category + "','" + owner + "','" + brand + "');"
+         connection.query(addProduct, (err,result) => {
+            if (err) throw err;
+            console.log(result);
+           });
+
+        }
+
+        //rendhome(res, address, website)
+
+   }
+   else res.redirect('/login') 
+  }
+});
+
 app.get('/mp',(req, res) => {
    console.log("getProduct!") 
    ops = 'Manage Product'
@@ -179,28 +221,15 @@ app.get('/mp',(req, res) => {
      || req.headers.referer.match('mp') || req.headers.referer.match('rp') 
      || req.headers.referer.match('blk')) {
 
-      const queryHome = "select * from varitas.owners where name='"+ req.query.owner + "'";
-       const queryBrand = "select * from varitas.brands where owner='"+ req.query.owner + "'";
-
-       connection.query(queryHome, (err,result) => {
-          if (err) throw err;
-          console.log(result);
-          if (result[0]){
-             owner = result[0]['name']
-             address = result[0]['addr']
-             website = result[0]['website']
-          }  
-         }); 
+      const queryProducts = "select * from varitas.products where owner_name='"+ req.query.owner + "'";
          
-         connection.query(queryBrand, (err1,result1) => {
+      connection.query(queryProducts, (err1,result1) => {
             if (err1) throw err1;
             console.log(result1);
-            var brandandCate;
+            var productandCate;
             result1.forEach(element => {
-               brandandCate = brandandCate + '\<option value=\"' + element['name'] + ":" + element['category'] + '\"\>' + element['name'] + ":::" + element['category'] + '\<\/option\>'
-               brandName = element['name']
-               category = element['category']
-               console.log(category);
+               productandCate = productandCate + '\<option value=\"' + element['name'] + ":" + element['category'] +  ":" + element['brand_name'] +'\"\>' + element['name'] + ":::" + element['category'] +  ":::" + element['brand_name'] + '\<\/option\>'
+               console.log(productandCate);
                
             }); 
               
@@ -208,10 +237,8 @@ app.get('/mp',(req, res) => {
             res.render('product',{
                owner,
                ops,
-               address,
-               website,
                opsColor,
-               brandandCate 
+               productandCate 
             })    
          }); 
          
@@ -224,35 +251,74 @@ app.get('/rp',(req, res) => {
    console.log("gethere!") 
    ops = 'View Reports'
    opsColor = "rp";
+
    if(req.headers.referer){ //check if req come from login auth
       console.log(req.headers.referer)
      if(req.headers.referer.match('login') || req.headers.referer.match('ma') 
      || req.headers.referer.match('mp') || req.headers.referer.match('rp') 
      || req.headers.referer.match('blk')) {
-       const selectOwner = "select * from varitas.owners where name='"+ req.query.owner + "'";
-       connection.query(selectOwner, (err,result) => {
-          if (err) throw err;
-          console.log(result);
-          if (result[0]){
-            owner = result[0]['name']
-            address = result[0]['addr']
-            console.log(address)
-            website = result[0]['website']
-            res.render('ownerhome',{
+      var query1 = "select sum(total_yield) from varitas.solar_gen where owner_id= 1 and product_id = 1";
+      var query2 = "select sum(total_yield) from varitas.solar_gen where owner_id= 1 and product_id = 2";
+      connection.query(query1, (err1,result1) => {
+         var s1 = [];
+         if (err1) throw err1;
+         console.log(result1);
+         solar_1 = {a: 'solar_1', b: result1[0]['sum(total_yield)']}
+         console.log(solar_1);
+         s1.push(solar_1);
+         connection.query(query2, (err1,result2) => {
+            if (err1) throw err1;
+            console.log(result2);
+            solar_2 = {a: 'solar_2', b: result2[0]['sum(total_yield)']}
+            console.log(solar_2) 
+            s1.push(solar_2);
+            console.log(s1) 
+
+            res.render('report', {
                owner,
                ops,
-               address,
-               website,
-               opsColor
-            })
-         }
-         }); 
-         
-   }
+               opsColor,
+               s1
+            });
+             
+          }); 
+          
+         });
+    }        
    else res.redirect('/login') 
   }
 });
 
+
+function getsum(){
+      var solar_1;
+      var solar_2;
+      
+      var query1 = "select sum(total_yield) from varitas.solar_gen where owner_id= 1 and product_id = 1";
+      var query2 = "select sum(total_yield) from varitas.solar_gen where owner_id= 1 and product_id = 2";
+
+      connection.query(query1, (err1,result1) => {
+         var s1 = [];
+         if (err1) throw err1;
+         console.log(result1);
+         solar_1 = {a: 'solar_1', b: result1[0]['sum(total_yield)']}
+         console.log(solar_1);
+         s1.push(solar_1);
+         connection.query(query2, (err1,result2) => {
+            if (err1) throw err1;
+            console.log(result2);
+            solar_2 = {a: 'solar_2', b: result2[0]['sum(total_yield)']}
+            console.log(solar_2) 
+            s1.push(solar_2) 
+            console.log(s1) 
+            return s1;  
+          }); 
+         
+         
+
+       });
+
+}
 app.get('/blk',(req, res) => {
    console.log("gethere!") 
    ops = 'Manage Transactions'
