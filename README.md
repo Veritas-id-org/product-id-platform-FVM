@@ -52,3 +52,15 @@ If you see a login screen like the following. Congradulations!
 
 
 # Code structure
+
+The code is organise as follows
+
+```
+|--src
+  |-- express.js (main program)
+  |-- views      ( contains ejs file for portal pages rendering)
+```  
+  
+  
+  
+
