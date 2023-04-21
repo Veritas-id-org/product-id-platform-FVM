@@ -1,0 +1,107 @@
+.ManagePages-container{
+    background-color: #eaddcf;
+
+    .ManagePages-card-wrapper{
+        width: 100%;
+        height: 100vh;
+        display: flex;
+
+        .ManagePages-card{
+            margin-left: auto;
+            margin-right: auto;
+            width: 100vh;
+            height:80%;
+            font-size: 18px;
+            font-weight: 600;
+            background-color: #fffffe;
+            box-shadow: 1em 1em 2em .25em rgba(210, 207, 207, 0.5);
+            align-self: center;
+            .ManagePages-card-top{
+                display: flex;
+                flex-direction: row;
+                flex:1;
+                // margin-left: auto;
+                // margin-right: auto;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .ManagePages-card-bottom{
+                display: grid;
+                grid-template-columns: 0.4fr 1fr;
+                // height:50vh;
+                .ManagePages-card-left{
+                    display: flex;
+                    flex-direction: column;
+                    flex:1;
+                    align-items: center;
+                    margin: auto auto;
+                }
+                .ManagePages-card-right{
+                    padding:10px;
+                    span{
+                        font-size: 24px;
+                    }
+                   .ManagePages-card-right-content{
+                    display: flex;
+                    flex-direction: row;
+                    margin-bottom: 10px;
+                    
+                    .ManagePages-card-right-content-title{
+                        width:8rem;
+                    }
+                    
+                    input{
+                        width:15rem;
+                    }
+                } 
+
+                    .textInput{
+                        display: flex;
+                        flex-direction: column;
+                        
+                        textarea{
+                            width: 50vh;
+                            height: 10vh;
+                        }
+                    }
+                }
+            }
+            
+            
+        }
+        .ManagePages-btn{
+            width: 130px;
+            height: 7vh;
+            color: #fff;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+            7px 7px 20px 0px rgba(0,0,0,.1),
+            4px 4px 5px 0px rgba(0,0,0,.1);
+            outline: none;
+            background: rgb(6,14,131);
+            background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+            border: none;
+
+            &:hover{
+                background: rgb(0,3,255);
+                background: linear-gradient(0deg, rgba(0,3,255,1) 0%, rgba(2,126,251,1) 100%);
+            }
+        }
+        .right{
+            width:15vh;
+            height: 5vh;
+            font-size: 14px;
+        }
+    }
+}
