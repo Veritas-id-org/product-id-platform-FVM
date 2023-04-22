@@ -1,21 +1,30 @@
 $color: #2194E0;
+$screen-height: calc(100vh - #{100px});
 
 .loginPage-container{
-  height:100vh;
+  height:$screen-height;
   background-color: #eaddcf;
+  display: flex;
+  // align-items: center;
+
   .loginPage-wrapper{
     // position: absolute;
     // top: 50%;
     // left: 50%;
+    display: flex;
+    flex-direction: column;
     width: 400px;
+    height:40vh;
     padding: 40px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 20vh;
     // transform: translate(-50%, -50%);
     background: #16161a;
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
+
 
   .title{
     text-align: center;

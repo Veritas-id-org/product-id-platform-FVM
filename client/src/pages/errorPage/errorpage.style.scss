@@ -1,0 +1,19 @@
+$screen-height: calc(100vh - #{100px});
+
+.errorpage-container{
+    background-color: #eaddcf;
+    text-align: center;
+    align-items: center;
+    height: $screen-height;
+    .errorpage-content{
+        display: flex;
+        flex-direction: column;
+        h1{
+            margin-top: 10vh;
+        }
+        img{
+            height:50vh;
+        } 
+    }
+    
+}

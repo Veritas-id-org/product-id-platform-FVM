@@ -14,11 +14,8 @@ const ManagePages = () => {
         // and uncomment the following line:
         // return 'paste-your-token-here'
 
-        // In a real app, it's better to read an access token from an
-        // environement variable or other configuration that's kept outside of
-        // your code base. For this to work, you need to set the
-        // WEB3STORAGE_TOKEN environment variable before you run your code.
-        return "YourToken";
+        //Your token
+        return process.env.WEB3STORAGE_TOKEN;
     }
 
     function makeStorageClient() {
