@@ -18,30 +18,49 @@ db.connect((err) => {
         console.log("Database Connection Failed!!!", err);
     } else {
         console.log("Connected to Database");
-        console.log("Creating database table");
-        let tableName = "users";
-        let tableName2 = "manage_account";
-
-        // Query to create table
-        let query = `CREATE TABLE ${tableName} 
-        (id INT AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, business_name VARCHAR(255), address VARCHAR(255), website VARCHAR(255), brand_name VARCHAR(255), category VARCHAR(255) 
-        )`;
-        // let query = `CREATE TABLE ${tableName}
-        // (id INT AUTO_INCREMENT PRIMARY KEY,
-        // username VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, INDEX username_index(username)
-        // )`;
-
-        // let query2 = `CREATE TABLE ${tableName2}
-        // (id INT AUTO_INCREMENT PRIMARY KEY,
-        // name VARCHAR(255) NOT NULL, username VARCHAR(255), address VARCHAR(255) NOT NULL, website VARCHAR(255), CONSTRAINT FK_User_Username FOREIGN KEY(username) REFERENCES users(username)
-        // )`;
-
-        db.query(query, (err, rows) => {
+        console.log("Creating database");
+        let databaseName = "product";
+        //Query to create database
+        let databaseQuery = `CREATE DATABASE ${databaseName} `;
+        db.query(databaseQuery, (err, rows) => {
             if (err) {
-                console.log("Table Exist");
+                console.log("Database exits");
             } else {
-                console.log(`Successfully Created Table - ${tableName}`);
+                console.log(`Successfully created database - ${databaseName}`);
+            }
+        });
+        const useDBSql = "USE product";
+        db.query(useDBSql, (err, rows) => {
+            if (err) {
+                throw err;
+            } else {
+                console.log(`Database ${databaseName} is selected`);
+                console.log("Creating database table");
+                let tableName = "users";
+                let tableName2 = "manage_account";
+
+                // Query to create table
+                let query = `CREATE TABLE ${tableName} 
+(id INT AUTO_INCREMENT PRIMARY KEY,
+username VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, business_name VARCHAR(255), address VARCHAR(255), website VARCHAR(255), brand_name VARCHAR(255), category VARCHAR(255) 
+)`;
+                // let query = `CREATE TABLE ${tableName}
+                // (id INT AUTO_INCREMENT PRIMARY KEY,
+                // username VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, INDEX username_index(username)
+                // )`;
+
+                // let query2 = `CREATE TABLE ${tableName2}
+                // (id INT AUTO_INCREMENT PRIMARY KEY,
+                // name VARCHAR(255) NOT NULL, username VARCHAR(255), address VARCHAR(255) NOT NULL, website VARCHAR(255), CONSTRAINT FK_User_Username FOREIGN KEY(username) REFERENCES users(username)
+                // )`;
+
+                db.query(query, (err, rows) => {
+                    if (err) {
+                        console.log("Table Exist");
+                    } else {
+                        console.log(`Successfully Created Table - ${tableName}`);
+                    }
+                });
             }
         });
 

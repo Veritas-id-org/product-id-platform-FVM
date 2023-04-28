@@ -11,8 +11,8 @@ import "./style.scss";
 function App() {
     return (
         <div className="app">
-            <Navbar />
             <BrowserRouter>
+                <Navbar />
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/login" element={<LoginPage />} />

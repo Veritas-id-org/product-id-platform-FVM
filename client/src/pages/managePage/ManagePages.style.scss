@@ -30,18 +30,30 @@
             .ManagePages-card-bottom{
                 display: grid;
                 grid-template-columns: 0.4fr 1fr;
-                // height:50vh;
+                height:50vh;
                 .ManagePages-card-left{
                     display: flex;
                     flex-direction: column;
                     flex:1;
-                    align-items: center;
+                    height: 100%;
+                    align-items:center;
+                    justify-content: center;
                     margin: auto auto;
                 }
                 .ManagePages-card-right{
                     padding:10px;
                     span{
                         font-size: 24px;
+                    }
+                    .ManagePages-card-right-viewreport{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 0px 10px;
+                    }
+                    .ManagePages-card-right-report{
+                        height: 30vh;
+
                     }
                    .ManagePages-card-right-content{
                     display: flex;

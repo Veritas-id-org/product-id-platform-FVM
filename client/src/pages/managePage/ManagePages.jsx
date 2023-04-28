@@ -3,6 +3,7 @@ import "./ManagePages.style.scss";
 import ManageAccount from "./ManageAccount";
 import ManageProduct from "./ManageProduct";
 import { Web3Storage, File } from "web3.storage";
+import ViewReports from "./ViewReports";
 
 const ManagePages = () => {
     const [selected, setSelected] = useState("manageaccount");
@@ -15,7 +16,7 @@ const ManagePages = () => {
         // return 'paste-your-token-here'
 
         //Your token
-        return process.env.WEB3STORAGE_TOKEN;
+        return process.env.REACT_APP_WEB3STORAGE_TOKEN;
     }
 
     function makeStorageClient() {
@@ -87,6 +88,7 @@ const ManagePages = () => {
                             {selected === "manageproduct" ? (
                                 <ManageProduct storeFile={storeFiles} makeFile={makeFileObjects} />
                             ) : null}
+                            {selected === "viewreport" ? <ViewReports /> : null}
                         </div>
                     </div>
                 </div>

@@ -12,8 +12,13 @@ const ManageProduct = (props) => {
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
     const handleAdd = () => {
-        let file = props.makeFile(input);
-        props.storeFile(file);
+        try {
+            let file = props.makeFile(input);
+            props.storeFile(file);
+            alert("Files are stored successfully!");
+        } catch (error) {
+            alert("Failed to store files, please try again.");
+        }
     };
     return (
         <>

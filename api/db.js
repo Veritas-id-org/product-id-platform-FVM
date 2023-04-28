@@ -7,7 +7,7 @@ export const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: process.env.DB_PASSWORD,
-    database: "product",
+    // database: "product",
     authPlugins: {
         mysql_clear_password: () => Buffer.from(process.env.DB_PASSWORD),
     },
