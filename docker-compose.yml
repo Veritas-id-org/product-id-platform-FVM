@@ -1,0 +1,72 @@
+version: '3.8'
+
+x-common-variables: &common-variables
+  MYSQL_DATABASE: $MYSQL_DATABASE
+  MYSQL_USER: $MYSQL_USER
+  MYSQL_PASSWORD: $MYSQL_PASSWORD
+
+services:
+  db:
+    image: mysql
+    restart: always
+    cap_add:
+      - SYS_NICE
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./api/db-setup.sql:/docker-entrypoint-initdb.d/setup.sql
+    ports:
+      - "9906:3306"
+    environment:
+      <<: *common-variables
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_HOST: $MYSQL_HOST
+
+  nginx:
+    depends_on:
+      - backend_srv
+      - frontend_srv
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - 8008:80
+  backend_srv:
+    build:
+      context: ./api
+      target: dev
+    depends_on:
+      - db
+    command: npm run start:dev
+    environment:
+      <<: *common-variables
+      PORT: $API_PORT
+      NODE_ENV: development
+    ports:
+      - $API_PORT:$API_PORT
+    volumes:
+      - ./api:/src
+      - /src/node_modules
+
+  frontend_srv:
+    stdin_open: true
+    build: 
+      context: ./client
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - $CLIENT_PORT:$CLIENT_PORT
+    volumes:
+      - /src/node_modules
+      - ./client:/src
+  adminer:
+    image: adminer:latest
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+volumes:
+  mysql_data:
