@@ -1,4 +1,6 @@
-import { db } from "../db.js";
+import { connetToDatabase } from "../db.js";
+
+const db = connetToDatabase();
 
 export const addPost = (req, res) => {
     res.json("from controller");

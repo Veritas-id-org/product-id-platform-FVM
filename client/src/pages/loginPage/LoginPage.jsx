@@ -22,7 +22,8 @@ const LoginPage = () => {
         e.preventDefault();
         try {
             await login(inputs);
-            await axios.post("/auth/login", inputs);
+            const res = await axios.post("/api/auth/login", inputs);
+            console.log(res);
             navigate(`/manage/${inputs.username}`);
         } catch (error) {
             console.log(error);

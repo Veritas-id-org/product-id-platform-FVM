@@ -5,8 +5,7 @@ import postRoutes from "./routes/posts.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
-import { db } from "./db.js";
-
+import { connetToDatabase } from "./db.js";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -14,10 +13,19 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use("/api/posts", postRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/auth", authRoutes);
+app.use("/posts", postRoutes);
+app.use("/users", userRoutes);
+app.use("/auth", authRoutes);
 
+app.get("/", (req, res) => {
+    res.json("Testing Node.js Server");
+});
+
+app.listen(PORT, () => {
+    console.log("Server Connected!");
+});
+
+const db = connetToDatabase();
 db.connect((err) => {
     if (err) {
         console.log("Database Connection Failed!!!", err);
@@ -70,12 +78,4 @@ username VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(25
             }
         });
     }
-});
-
-app.get("/", (req, res) => {
-    res.json("Testing Node.js Server");
-});
-
-app.listen(PORT, () => {
-    console.log("Server Connected!");
 });

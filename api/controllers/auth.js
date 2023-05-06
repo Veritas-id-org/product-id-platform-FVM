@@ -1,8 +1,12 @@
-import { db } from "../db.js";
+import { connetToDatabase } from "../db.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+const db = connetToDatabase();
+
 export const register = (req, res) => {
+    console.log("register API called");
+    console.log(req.body);
     //check existing user
     const q = "SELECT * FROM users WHERE email = ? OR username = ?";
 
@@ -32,6 +36,9 @@ export const register = (req, res) => {
 
 export const login = (req, res) => {
     //Check User
+    console.log("login API called");
+    console.log(req.body);
+
     const q = "SELECT * FROM users WHERE username = ?";
     db.query(q, [req.body.username], (err, data) => {
         if (err) {

@@ -6,8 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 const Navbar = () => {
     const { currentUser, logout } = useContext(AuthContext);
     const navigate = useNavigate();
-    const handleLogout = () => {
-        logout();
+    const handleLogout = async () => {
+        await logout();
         navigate("/");
     };
     return (

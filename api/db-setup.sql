@@ -1,6 +1,13 @@
-CREATE TABLE IF NOT EXISTS `posts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(150) NOT NULL,
-  `body` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+-- CREATE TABLE IF NOT EXISTS `users` (
+--   `id` int(11) NOT NULL AUTO_INCREMENT,
+--   `username` varchar(150) NOT NULL,
+--   `email` varchar(150) NOT NULL,
+--   `password` varchar(150) NOT NULL,
+--   `business_name` VARCHAR(255), 
+--   `address` VARCHAR(255), 
+--   `website` VARCHAR(255), 
+--   `brand_name` VARCHAR(255), 
+--   `category` VARCHAR(255) 
+--   PRIMARY KEY (`id`)
+-- ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+CREATE DATABASE IF NOT EXISTS `product`;
