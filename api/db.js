@@ -33,9 +33,16 @@ dotenv.config();
 export const connetToDatabase = () => {
     const db = mysql.createConnection({
         host: "db",
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_DATABASE,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: process.env.MYSQL_DATABASE,
+    });
+    db.connect((err) => {
+        if (err) {
+            console.log("Database Connection Failed!!!", err);
+        } else {
+            console.log("Connected to Database");
+        }
     });
     return db;
 };
