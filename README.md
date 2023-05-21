@@ -1,4 +1,4 @@
-# product-id-platform-FVM
+# FVM Dataverse 
 
 ## Inspiration
  "While moving to renewables can address 55% of global GHG emissions, to achieve UN climate goals it is imperative to tackle the remaining 45%" (Ellen MacArthur Foundation)
@@ -7,9 +7,6 @@ Product emission has been largely overlooked, although it accounts for 45% of th
 Built on the Veritas-ID.org platform, in this hackathon, we have explored the applications of Filecoin Virtual Machine (FVM) as a reporting engine to ensure verifiability of climate emissions reports, which play critical roles in ensuring brands’ social commitment and regulation requirements. Unlike others who use ‘guesswork’ like estimation, to generate reports that may be error-prone or ‘green-washing’, our reports are generated from trusted and transparent data recorded on DLT (Distributed Ledger Technologies). This allows our compliance reports to be trusted, transparent and verifiable across a brand’s value chain.
 ## How we built it
 As shown below, the high-level architecture of the reporting engine, which is based on Filecoin Virtual Machine (FVM), acts as an extension of the Veritas-ID.org digital product ID platform.
-
-
-
 By analysing the data on the IPFS system, we planned to get insights by allowing third-party applications to gain access via FVM. Essentially, we planned FVM to be an automated gateway to allow integration with external applications. We are keen to explore better options, for scalability purposes.
 ## Challenges we ran into
 Due to the time and resource constraints, we have not implemented all the features or functions highlighted in the system. 
