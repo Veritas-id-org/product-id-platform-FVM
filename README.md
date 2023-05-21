@@ -8,7 +8,7 @@ Built on the Veritas-ID.org platform, in this hackathon, we have explored the ap
 ## How we built it
 As shown below, the high-level architecture of the reporting engine, which is based on Filecoin Virtual Machine (FVM), acts as an extension of the Veritas-ID.org digital product ID platform.
 
-![Alt text](relative%20path/FVM.png?raw=true "Title")
+![Alt text](FVM.png?raw=true "Title")
 
 By analysing the data on the IPFS system, we planned to get insights by allowing third-party applications to gain access via FVM. Essentially, we planned FVM to be an automated gateway to allow integration with external applications. We are keen to explore better options, for scalability purposes.
 ## Challenges we ran into
