@@ -1,4 +1,4 @@
-# FVM Dataverse Hack
+# Verifiable Reporting Platform
 
 ## Inspiration
  "While moving to renewables can address 55% of global GHG emissions, to achieve UN climate goals it is imperative to tackle the remaining 45%" (Ellen MacArthur Foundation)
