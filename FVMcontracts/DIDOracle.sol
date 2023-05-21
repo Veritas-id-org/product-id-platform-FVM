@@ -72,6 +72,17 @@ contract DIDOracle is ChainlinkRequestInterface, OracleInterface, Ownable, LinkT
     }
 
   /**
+   * @notice Local implementation of the modifier
+   * @dev Checks if LINK token are used
+   */
+  modifier onlyAuthCaller() {
+    require(authorizedSender[_node], "Sender not authorized");
+    _;
+  }
+
+
+
+  /**
    * @notice Creates the Chainlink request
    * @dev Stores the hash of the params as the on-chain commitment for the request.
    * Emits OracleRequest event for the Chainlink node to detect.
@@ -97,6 +108,7 @@ contract DIDOracle is ChainlinkRequestInterface, OracleInterface, Ownable, LinkT
     external
     override
     onlyLINK()
+    onlyAuthCaller()
     checkCallbackAddress(_callbackAddress)
   {
     bytes32 requestId = keccak256(abi.encodePacked(_sender, _nonce));
@@ -195,11 +207,6 @@ contract DIDOracle is ChainlinkRequestInterface, OracleInterface, Ownable, LinkT
     onlyOwner()
   {
     authorizedNodes[_node] = _allowed;
-  }
-
-  function isAuthorizedSender(address _node) external view override returns (bool){
-    require(authorizedSender[_node]);
-    return true;
   }
 
   function whitelistSender(address _node) external onlyOwner returns(bool) {
@@ -327,8 +334,8 @@ contract DIDOracle is ChainlinkRequestInterface, OracleInterface, Ownable, LinkT
 
   /**
    * @dev empty override of the interface function
-   * @param _funcSelector
-   * @param _data
+   * @param _funcSelector open
+   * @param _data open
    */
   function _validateTokenTransferAction(bytes4 _funcSelector, bytes memory _data) internal override {
 
