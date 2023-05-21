@@ -1,4 +1,4 @@
-# Verifiable Reporting Platform (built on FVM Dataverse Hack 2023) - Verifiable Climate Emission Reporting
+# Verifiable Climate Emission Reporting - built on FVM Dataverse Hack 2023 
 
 ## Inspiration
  "While moving to renewables can address 55% of global GHG emissions, to achieve UN climate goals it is imperative to tackle the remaining 45%" (Ellen MacArthur Foundation)
